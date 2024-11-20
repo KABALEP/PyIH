@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    {% for itm in contracts_list %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Номер</th>
+                <th>Описание</th>
+                <th>Дата начала</th>
+                <th>Дата окончания</th>
+                <th>Владелец</th>
+                <th>Получатель</th>
+                <th>Вещь</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{itm.id}}</td>
+                <td>{{itm.text}}</td>
+                <td>{{itm.start_date}}</td>
+                <td>{{itm.end_date}}</td>
+                <td>{{itm.leaser}}</td>
+                <td>{{itm.taker}}</td>
+                <td>{{itm.item}}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+    
+
+    <form action="/contracts" method="post">
+        Описание: <br>
+        <input type="text" name="text"> <br>
+        Дата начала: <br>
+        <input type="text" name="start_date" step="any"> <br>
+        Дата окончания: <br>
+        <input type="text" name="end_date" step="any"> <br>
+        Владелец: <br>
+        <input type="number" name="leaser" step="any"> <br>
+        Получатель: <br>
+        <input type="number" name="taker" step="any"> <br>
+        Вещь: <br>
+        <input type="number" name="item" ><br>
+
+        <input type="submit" value="add item">
+    </form>
+</body>
+
+</html>

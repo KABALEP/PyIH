@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    {% for itm in items_list %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Фото</th>
+                <th>Описание</th>
+                <th>Цена за час</th>
+                <th>Цена за день</th>
+                <th>Цена за неделю</th>
+                <th>Цена за месяц</th>
+                <th>Владелец</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{itm.name}}</td>
+                <td>{{itm.photo}}</td>
+                <td>{{itm.description}}</td>
+                <td>{{itm.price_hour}}</td>
+                <td>{{itm.price_day}}</td>
+                <td>{{itm.price_week}}</td>
+                <td>{{itm.price_month}}</td>
+                <td>{{itm.owner}}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+    
+
+    <form action="/items" method="post">
+        Name: <br>
+        <input type="text" name="name"> <br>
+        Photo: <br>
+        <input type="text" name="photo"> <br>
+        Description: <br>
+        <input type="text" name="description"> <br>
+        Price hour: <br>
+        <input type="number" name="price_hour" step="any"> <br>
+        Price day: <br>
+        <input type="number" name="price_day" step="any"> <br>
+        Price week: <br>
+        <input type="number" name="price_week" step="any"> <br>
+        Price month: <br>
+        <input type="number" name="price_month" step="any"> <br>
+        <input type="hidden" name="owner" value="{{item_owner}}" readonly><br>
+
+        <input type="submit" value="add item">
+    </form>
+</body>
+
+</html>
