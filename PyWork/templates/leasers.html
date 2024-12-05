@@ -1,26 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-
-<body>
-    {% for itm in leasers_list %}
-        {% if itm.id != not_belong_leaser %}
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>{{ itm.full_name }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ itm.photo }}</td>
-                        <td>{{ itm.contacts }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        {% endif %}
-    {% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+{% for itm in leasers_list %}
+{% if itm.id != not_belong_leaser %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>{{ itm.full_name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ itm.photo }}</td>
+                <td>{{ itm.contacts }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endif %}
+{% endfor %}
+{% endblock %}

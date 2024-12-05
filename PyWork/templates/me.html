@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-
-<body>
-    {% for itm in user_info %}
+{% extends 'base.html' %}
+{% block content %}
+{% for itm in user_info %}
 
     <div>{{itm.login}}</div>
     <div>{{itm.photo}}</div>
@@ -14,7 +9,6 @@
     <div>{{itm.contacts}}</div>
     
     {% endfor %}
+{% endblock %}
+    
   
-</body>
-
-</html>

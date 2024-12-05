@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; 
+            color: #e0e0e0; 
+        }
+        a {
+            color: #03a9f4; 
+            text-decoration: none;
+        }
+        a:hover {
+            color: #0288d1; 
+        }
+        nav {
+            background-color: #1e1e1e; 
+            color: white;
+            padding: 0.5em 1em;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav ul li {
+            margin: 0 0.5em;
+        }
+        nav ul li a {
+            color: white;
+            padding: 0.5em 1em;
+            transition: background 0.3s, color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #333333;
+            border-radius: 5px;
+        }
+        .nav-right {
+            margin-left: auto;
+        }
+        main {
+            padding: 1em;
+        }
+        footer {
+            background-color: #1e1e1e;
+            color: #aaaaaa; 
+            text-align: center;
+            padding: 1em 0;
+            margin-top: 2em;
+        }
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav ul li {
+                margin: 0.5em 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/search">Поиск</a></li>
+            <li><a href="/leasers">Арендаторы</a></li>
+            
+            {% if session.get('user_login') %}
+                <li><a href="/items">Товары</a></li>
+                <li><a href="/contracts">Контракты</a></li>
+                <li class="nav-right"><a href="/me">Мой профиль</a></li>
+                <li><a href="/logout">Выйти</a></li>
+            {% else %}
+                <li class="nav-right"><a href="/login">Войти</a></li>
+                <li><a href="/register">Регистрация</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>
