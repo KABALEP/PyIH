@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Artist Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Добро пожаловать, {{ request.user.username }}!</h1>
+
+    <div class="buttons">
+        <a href="{% url 'add_genre' %}" class="cta-button">Создать жанр</a>
+        
+        <a href="{% url 'add_track' %}" class="cta-button">Создать трек</a>
+
+        <a href="{% url 'album_create' %}" class="cta-button">Создать альбом</a>
+    </div>
+    
+    <h2>Ваши треки:</h2>
+    {% for track in tracks %}
+        <div class="track">
+            <h3>{{ track.title }}</h3>
+            <p>Жанр: {{ track.genre.name }}</p>
+            <p>Дата релиза: {{ track.release_date }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

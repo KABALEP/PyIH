@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить жанр{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
+    <form action="{% url 'add_genre' %}" method="post" style="background: #184e8b; padding: 40px; border-radius: 16px; width: 100%; max-width: 400px; color: white;">
+        <h2 style="text-align: center;">Добавить жанр</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" value="Добавить жанр" style="background-color: #ffdd57; color: #333; border: none; padding: 12px; border-radius: 24px; width: 100%; cursor: pointer;">
+    </form>
+</div>
+{% endblock %}

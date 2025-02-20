@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Мои Треки{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center mb-4">🎵 Профиль пользователя: <span class="text-primary">{{ user.username }}</span></h2>
+
+    {% if cut_tracks %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for cut_track in cut_tracks %}
+                <div class="col">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ cut_track.original_track.title }} 
+                                <small class="text-muted">({{ cut_track.start_time }}–{{ cut_track.end_time }} сек)</small>
+                            </h5>
+                            {% if cut_track.cut_audio_file %}
+                                <audio controls class="w-100 mt-2">
+                                    <source src="{{ cut_track.cut_audio_file.url }}" type="audio/mpeg">
+                                    Ваш браузер не поддерживает воспроизведение аудио.
+                                </audio>
+                            {% else %}
+                                <p class="text-danger mt-2">⚡ Аудиофайл не загружен.</p>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer bg-transparent border-0 text-end">
+                            <small class="text-muted">🎧 Добавлено: {{ cut_track.created_at|date:"d M Y H:i" }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center mt-4" role="alert">
+            😔 У вас пока нет вырезанных треков. Попробуйте добавить несколько!
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

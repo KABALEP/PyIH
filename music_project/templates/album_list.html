@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Все альбомы{% endblock %}
+
+{% block content %}
+
+{% for album in albums %}
+
+<p>Артист: {{ album.artist.name }}</p>
+<p>Жанр: {{ album.genre.name }}</p>
+<p>Дата релиза: {{ album.release_date }}</p>
+
+{% endfor %}
+{% endblock %}

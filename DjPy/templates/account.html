@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}User Acc{% endblock %}
+
+{{ trainer_data }}
+
+<p></p>
+{% block content %}
+  {% for day in trainer_schedule %}
+    {{ day }}
+  {% endfor %}
+{% endblock %}

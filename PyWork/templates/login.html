@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+{{ error_message }}
 <form action="/login" method="post">
-
+    {error_message}
     login: <br>
     <input type="text" name="login"> <br>
     Password: <br>

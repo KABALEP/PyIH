@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}🎵 Нарезка трека{% endblock %}
+
+{% block content %}
+<h1>Нарезка трека: {{ track.title }}</h1>
+
+<form action="{% url 'cut_track' track_id=track.id%}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="start_time">Начало (в секундах):</label>
+        {{ form.start_time }}
+    </div>
+    <div class="form-group">
+        <label for="end_time">Конец (в секундах):</label>
+        {{ form.end_time }}
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+
+{% endblock %}

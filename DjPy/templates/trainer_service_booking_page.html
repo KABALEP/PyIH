@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Service{% endblock %}
+
+{% block content %}
+
+<h2>Booking Details</h2>
+<p>Trainer: {{ trainer.username }}</p>
+<p>Service: {{ service.category.name }}</p>
+<p>Start Time: {{ booking.datetime_start }}</p>
+<p>End Time: {{ booking.datetime_end }}</p>
+
+{% endblock %}

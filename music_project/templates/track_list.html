@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}🎵 Все треки{% endblock %}
+
+{% block content %}
+<style>
+    .track-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Больше карточек в строке */
+        gap: 16px;
+        padding: 20px;
+    }
+
+    .track-card {
+        background-color: #1e1e2f;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        padding: 16px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+        height: 220px; /* Сниженная высота */
+    }
+
+    .track-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .track-card img {
+        width: 100%;
+        height: 80px; /* Меньше обложка */
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .track-info h2 {
+        color: #ffdd57;
+        font-size: 1.1rem; /* Уменьшен заголовок */
+        margin-bottom: 4px;
+    }
+
+    .track-info p {
+        color: #eaeaea;
+        font-size: 0.85rem;
+        margin: 2px 0;
+    }
+
+    .audio-player {
+        margin-top: 10px;
+        width: 100%;
+        border-radius: 8px;
+        height: 30px;
+    }
+
+    @media (max-width: 768px) {
+        .track-container {
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+
+        .track-card {
+            height: auto;
+        }
+
+        .track-card img {
+            height: 60px;
+        }
+    }
+</style>
+
+<h1 style="text-align: center; color: #fff; margin-top: 10px;">🎧 Все доступные треки</h1>
+
+<div class="track-container">
+    {% for track in tracks %}
+    <div class="track-card">
+        {% if track.track_image %}
+            <img src="{{ track.track_image.url }}" alt="Обложка трека">
+        {% else %}
+            <img src="https://via.placeholder.com/200x80.png?text=Нет+обложки" alt="Нет обложки">
+        {% endif %}
+
+        <div class="track-info">
+            <h2><a href="{% url 'track_detail' track_id=track.id %}">{{ track.title }}</h2>
+            <p>👤 <strong>{{ track.artist.name }}</strong></p>
+            {% if track.album %}
+                <p>💿 <strong>{{ track.album.title }}</strong></p>
+            {% endif %}
+            <p>📅 {{ track.release_date|date:"d M Y" }}</p>
+        </div>
+
+        {% if track.audio_file %}
+            <audio class="audio-player" controls>
+                <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+                Ваш браузер не поддерживает воспроизведение аудио.
+            </audio>
+        {% else %}
+            <p style="color: #ff6b6b;">⚡ Аудиофайл не загружен.</p>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p style="color: #fff; text-align: center;">😔 Пока что треков нет.</p>
+    {% endfor %}
+</div>
+{% endblock %}

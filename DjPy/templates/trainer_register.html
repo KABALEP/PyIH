@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Signuo{% endblock %}
+
+{% block content %}
+
+    <form action="/register/trainer/" method="post">
+        {% csrf_token %}
+        User Name:<input type="text" name="user_name">
+        Password:<input type="password" name="password">
+        Name:<input type="text" name="first_name">
+        Last Name:<input type="text" name="last_name">
+        email:<input type="email" name="email">
+        <input type="submit">
+    </form>
+
+{% endblock %}

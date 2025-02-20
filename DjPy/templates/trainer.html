@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Trainer page{% endblock %}
+
+{% block content %}
+<h2>Services</h2>
+{% for service in services %}
+    <br><a href="{% url 'trainer_services' trainer_id=trainer.id service_id=service.id%}">{{service.category.name}}</a>
+    <br> {{service.price}}
+    <br> {{service.duration}}
+    <br> {{service.level}}
+{% endfor %}
+{% if user and trainer and user.id == trainer.id %}
+<p>
+    <h1>Add service</h1>
+    <form action="{% url 'create_service' trainer_id=trainer.id%}" method="post">
+        {% csrf_token %}
+        <select name="category">
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{category.name}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        duration:<input type="number" name="duration">
+        price:<input type="number" name="price">
+        <select name="level">
+            <option value="1">Easy</option>
+            <option value="2">Medium</option>
+            <option value="3">Hard</option>
+        </select>
+        <input type="submit" name="service_added">
+    </form>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}🎵 Информация о треке{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #121212;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .track-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 30px;
+    }
+
+    .track-card {
+        background-color: #1e1e2f;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        padding: 24px;
+        display: flex;
+        flex-direction: row; /* Горизонтальное расположение */
+        width: 1000px; /* Увеличена ширина карточки */
+        max-width: 100%; /* Максимальная ширина карточки */
+        text-align: left;
+        gap: 20px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        overflow: hidden;
+    }
+
+    .track-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+    }
+
+    .track-card img {
+        width: 250px; /* Увеличенная ширина изображения */
+        height: 250px; /* Увеличенная высота изображения */
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .track-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        color: #eaeaea;
+        flex-grow: 1; /* Правый блок будет занимать оставшееся пространство */
+    }
+
+    .track-info h2 {
+        color: #ffdd57;
+        font-size: 1.8rem; /* Размер заголовка */
+        margin: 10px 0;
+    }
+
+    .track-info p {
+        font-size: 1rem;
+        margin: 5px 0;
+    }
+
+    .track-info strong {
+        color: #fff;
+    }
+
+
+    @media (max-width: 768px) {
+        .track-card {
+            width: 100%; /* На мобильных устройствах карточка будет занимать всю ширину */
+            flex-direction: column; /* Элементы будут располагаться вертикально */
+            gap: 15px;
+        }
+
+        .track-card img {
+            width: 100%; /* Изображение будет занимать всю ширину */
+            height: auto; /* Автоматическая высота для сохранения пропорций */
+        }
+
+        .audio-player {
+            height: 30px;
+        }
+    }
+</style>
+
+<h1 style="text-align: center; color: #fff; margin-top: 20px;">🎧 Все о треке</h1>
+
+<div class="track-container">
+    <div class="track-card">
+        <div class="track-image">
+            {% if track.track_image %}
+                <img src="{{ track.track_image.url }}" alt="Обложка трека">
+            {% else %}
+                <img src="https://via.placeholder.com/250x250.png?text=Нет+обложки" alt="Нет обложки">
+            {% endif %}
+        </div>
+
+        <div class="track-info">
+            <h2>{{ track.title }}</h2>
+            <p>👤 <strong>{{ track.artist.name }}</strong></p>
+            {% if track.album %}
+                <p>💿 <strong>{{ track.album.title }}</strong></p>
+            {% endif %}
+            <p>📅 {{ track.release_date|date:"d M Y" }}</p>
+        </div>
+
+        {% if track.audio_file %}
+            <audio controls>
+                <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+                Ваш браузер не поддерживает воспроизведение аудио.
+            </audio>
+        {% else %}
+            <p style="color: #ff6b6b;">⚡ Аудиофайл не загружен.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

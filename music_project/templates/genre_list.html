@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Genre list{% endblock %}
+
+{% block content %}
+  <div style="padding: 20px;">
+    <h2>Список жанров</h2>
+    <ul>
+      {% for genre in genre_list %}
+        <li>{{ genre.name }}</li>
+      {% empty %}
+        <li>Жанры отсутствуют.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

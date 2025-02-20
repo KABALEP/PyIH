@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}All Trainers{% endblock %}
+
+{% block content %}
+<h2>All Trainers</h2>
+<ul>
+    {% for trainer in trainers %}
+        <li><a href="{% url 'trainer_page' trainer_id=trainer.id %}">{{trainer.username}}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

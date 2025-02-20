@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Booking{% endblock %}
+
+{% block content %}
+<h2>Booking Details</h2>
+
+<p><strong>Service:</strong> {{ booking.service.category.name }}</p>
+<p><strong>Trainer:</strong> {{ booking.trainer.first_name }} {{ booking.trainer.last_name }}</p>
+<p><strong>Start Time:</strong> {{ booking.datetime_start }}</p>
+<p><strong>End Time:</strong> {{ booking.datetime_end }}</p>
+<p><strong>Status:</strong> {% if booking.status %}Confirmed{% else %}Pending{% endif %}</p>
+
+<br>
+{% if user == booking.trainer %}
+    <form action="{% url 'booking_page_accept' booking.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Accept Booking</button>
+    </form>
+{% endif %}
+{% if user == booking.trainer %}
+    <form action="{% url 'booking_page_cancel' booking.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Cancel Booking</button>
+    </form>
+{% endif %}
+<br>
+<a href="{% url 'user_page' %}">Back to My Bookings</a>
+{% endblock %}

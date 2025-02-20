@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Создать новый альбом{% endblock %}
+
+{% block content %}
+  <h2>Создать новый альбом</h2>
+  <form action="{% url 'album_create' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Создать альбом</button>
+  </form>
+{% endblock %}

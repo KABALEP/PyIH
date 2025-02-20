@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for itm in item_query %}
+
+{{itm.name}}
+{{itm.photo}}
+{{itm.description}}
+{{itm.price_hour}}
+{{itm.price_day}}
+{{itm.price_week}}
+{{itm.price_month}}
+{{itm.owner}}
+
+{%endfor%}
+{% endblock %}
